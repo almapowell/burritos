@@ -1,9 +1,17 @@
 import { createSlice } from "@reduxjs/toolkit";
+import {
+  beansList,
+  meatList,
+  riceList,
+  tortillaList,
+} from "../components/utils";
 
 export const burritoIngredients = createSlice({
   name: "burritoIngredients",
   initialState: {
     activeStep: 0,
+    cart: [],
+    editingBurrito: false,
     selectedTortilla: {
       label: "Wheat",
       value: "wheat",
@@ -25,7 +33,6 @@ export const burritoIngredients = createSlice({
       img: "https://cdn.caferio.com/251001.jpg",
     },
     selectedAddOns: [],
-    cart: [],
   },
   reducers: {
     stepForward: (state) => {
@@ -58,26 +65,10 @@ export const burritoIngredients = createSlice({
       );
     },
     resetBurrito: (state) => {
-      state.selectedTortilla = {
-        label: "Wheat",
-        value: "wheat",
-        img: "https://cdn.caferio.com/200050.jpg",
-      };
-      state.selectedMeat = {
-        label: "Beef",
-        value: "beef",
-        img: "https://cdn.caferio.com/50220.jpg",
-      };
-      state.selectedRice = {
-        label: "White Rice",
-        value: "white",
-        img: "https://cdn.caferio.com/200072.jpg",
-      };
-      state.selectedBeans = {
-        label: "Black Beans",
-        value: "black",
-        img: "https://cdn.caferio.com/251001.jpg",
-      };
+      state.selectedTortilla = tortillaList[0];
+      state.selectedMeat = meatList[0];
+      state.selectedRice = riceList[0];
+      state.selectedBeans = beansList[0];
       state.selectedAddOns = [];
     },
     addToCart: (state, action) => {
@@ -87,34 +78,14 @@ export const burritoIngredients = createSlice({
       state.cart = state.cart.filter((item) => item.id !== action.payload.id);
     },
     editBurrito: (state, action) => {
+      state.editingBurrito = true;
       state.selectedTortilla = action.payload.ingredients.selectedTortilla;
       state.selectedMeat = action.payload.ingredients.selectedMeat;
       state.selectedRice = action.payload.ingredients.selectedRice;
       state.selectedBeans = action.payload.ingredients.selectedBeans;
       state.selectedAddOns = action.payload.ingredients.selectedAddOns;
     },
-    resetAll: (state) => {
-      state.selectedTortilla = {
-        label: "Wheat",
-        value: "wheat",
-        img: "https://cdn.caferio.com/200050.jpg",
-      };
-      state.selectedMeat = {
-        label: "Beef",
-        value: "beef",
-        img: "https://cdn.caferio.com/50220.jpg",
-      };
-      state.selectedRice = {
-        label: "White Rice",
-        value: "white",
-        img: "https://cdn.caferio.com/200072.jpg",
-      };
-      state.selectedBeans = {
-        label: "Black Beans",
-        value: "black",
-        img: "https://cdn.caferio.com/251001.jpg",
-      };
-      state.selectedAddOns = [];
+    emptyCart: (state) => {
       state.cart = [];
       state.activeStep = 0;
     },
@@ -135,7 +106,7 @@ export const {
   addToCart,
   removeFromCart,
   editBurrito,
-  resetAll,
+  emptyCart,
 } = burritoIngredients.actions;
 
 export default burritoIngredients.reducer;

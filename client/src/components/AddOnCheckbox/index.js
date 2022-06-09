@@ -1,4 +1,4 @@
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Checkbox from "@mui/material/Checkbox";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import FormControl from "@mui/material/FormControl";
@@ -7,9 +7,11 @@ import { addAddOn, removeAddOn } from "../../redux/reducer";
 
 const AddOnCheckbox = ({ foodList }) => {
   const dispatch = useDispatch();
+  const selectedAddOns = useSelector(
+    (state) => state.burritoState.selectedAddOns
+  );
 
   const handleSelectedCheckbox = (index, adding) => {
-    console.log(adding);
     if (adding) {
       dispatch(addAddOn(addOnList[index]));
     } else {
@@ -22,7 +24,7 @@ const AddOnCheckbox = ({ foodList }) => {
       {foodList?.map((item, index) => (
         <FormControlLabel
           key={index}
-          value={item.value}
+          value={selectedAddOns.includes(item)}
           control={<Checkbox />}
           label={item.label}
           onChange={(e) => handleSelectedCheckbox(index, e.target.checked)}

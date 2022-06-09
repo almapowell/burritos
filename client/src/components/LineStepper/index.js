@@ -71,8 +71,9 @@ const LineStepper = () => {
       case 4:
         return (
           <div>
-            {selectedAddOns.map((item) => (
+            {selectedAddOns.map((item, index) => (
               <img
+                key={index}
                 style={{ height: 200 }}
                 alt="selected add on"
                 src={item?.img}
@@ -83,10 +84,6 @@ const LineStepper = () => {
       default:
         break;
     }
-  };
-
-  const isStepOptional = (step) => {
-    return step === 4;
   };
 
   const handleNext = () => {
@@ -121,10 +118,10 @@ const LineStepper = () => {
   return (
     <Box sx={{ width: "80%" }}>
       <Stepper activeStep={activeStep}>
-        {steps.map((label, index) => {
+        {steps.map((label) => {
           const stepProps = {};
           const labelProps = {};
-          if (isStepOptional(index)) {
+          if (label === "Add Ons - $1.00 Each") {
             labelProps.optional = (
               <Typography variant="caption">Optional</Typography>
             );
@@ -168,14 +165,16 @@ const LineStepper = () => {
               Back
             </Button>
             <Box sx={{ flex: "1 1 auto" }} />
-            <Button
-              variant="contained"
-              onClick={
-                activeStep === steps.length - 1 ? handleAddToCart : handleNext
-              }
-            >
-              {activeStep === steps.length - 1 ? "Add To Cart" : "Next"}
-            </Button>
+
+            {activeStep === steps.length - 1 ? (
+              <Button variant="contained" onClick={handleAddToCart}>
+                Add To Cart
+              </Button>
+            ) : (
+              <Button variant="contained" onClick={handleNext}>
+                Next
+              </Button>
+            )}
           </Box>
         </>
       )}

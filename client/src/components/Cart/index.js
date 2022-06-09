@@ -1,7 +1,7 @@
 import "./styles.css";
 import { Button, Modal, Typography, Box, Drawer, Badge } from "@mui/material";
 import { useState } from "react";
-import { removeFromCart, resetAll } from "../../redux/reducer";
+import { removeFromCart, emptyCart, resetBurrito } from "../../redux/reducer";
 import { useDispatch } from "react-redux";
 import CartItem from "./CartItem";
 
@@ -135,7 +135,8 @@ const CheckoutModal = ({ open, handleCloseModal, closeCart }) => {
   };
 
   const onClose = () => {
-    dispatch(resetAll());
+    dispatch(resetBurrito());
+    dispatch(emptyCart());
     handleCloseModal();
     closeCart();
   };
