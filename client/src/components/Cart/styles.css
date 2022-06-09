@@ -3,17 +3,11 @@
   margin-top: 50px;
 }
 
-.itemsWrapper {
-  display: flex;
-  justify-content: space-evenly;
-  flex-wrap: wrap;
-}
-
 .cartItem {
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
+  padding: 20px 40px;
 }
 
 .itemPrice {
@@ -32,17 +26,31 @@
   margin-left: 5px;
 }
 
+.editIcon svg {
+  transform: scale(0.7);
+  fill: grey;
+  margin-left: 5px;
+}
+
+.editIcon:hover {
+  cursor: pointer;
+}
+
 .checkout {
   display: flex;
-  justify-content: center;
   flex-direction: column;
-  align-items: flex-end;
   gap: 20px;
   font-size: 30px;
-  margin-top: 30px;
+  padding: 30px;
 }
 
 .confirmationButtons {
   display: flex;
   gap: 10px;
+}
+
+.shoppingCartButton {
+  width: 80%;
+  display: flex;
+  justify-content: flex-end;
 }

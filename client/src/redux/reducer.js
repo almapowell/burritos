@@ -3,6 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 export const burritoIngredients = createSlice({
   name: "burritoIngredients",
   initialState: {
+    activeStep: 0,
     selectedTortilla: {
       label: "Wheat",
       value: "wheat",
@@ -27,6 +28,15 @@ export const burritoIngredients = createSlice({
     cart: [],
   },
   reducers: {
+    stepForward: (state) => {
+      state.activeStep = state.activeStep + 1;
+    },
+    stepBackward: (state) => {
+      state.activeStep = state.activeStep - 1;
+    },
+    resetStep: (state) => {
+      state.activeStep = 0;
+    },
     updateTortilla: (state, action) => {
       state.selectedTortilla = action.payload;
     },
@@ -47,7 +57,7 @@ export const burritoIngredients = createSlice({
         (item) => item.value !== action.payload.value
       );
     },
-    resetAll: (state) => {
+    resetBurrito: (state) => {
       state.selectedTortilla = {
         label: "Wheat",
         value: "wheat",
@@ -76,19 +86,56 @@ export const burritoIngredients = createSlice({
     removeFromCart: (state, action) => {
       state.cart = state.cart.filter((item) => item.id !== action.payload.id);
     },
+    editBurrito: (state, action) => {
+      state.selectedTortilla = action.payload.ingredients.selectedTortilla;
+      state.selectedMeat = action.payload.ingredients.selectedMeat;
+      state.selectedRice = action.payload.ingredients.selectedRice;
+      state.selectedBeans = action.payload.ingredients.selectedBeans;
+      state.selectedAddOns = action.payload.ingredients.selectedAddOns;
+    },
+    resetAll: (state) => {
+      state.selectedTortilla = {
+        label: "Wheat",
+        value: "wheat",
+        img: "https://cdn.caferio.com/200050.jpg",
+      };
+      state.selectedMeat = {
+        label: "Beef",
+        value: "beef",
+        img: "https://cdn.caferio.com/50220.jpg",
+      };
+      state.selectedRice = {
+        label: "White Rice",
+        value: "white",
+        img: "https://cdn.caferio.com/200072.jpg",
+      };
+      state.selectedBeans = {
+        label: "Black Beans",
+        value: "black",
+        img: "https://cdn.caferio.com/251001.jpg",
+      };
+      state.selectedAddOns = [];
+      state.cart = [];
+      state.activeStep = 0;
+    },
   },
 });
 
 export const {
+  stepForward,
+  stepBackward,
+  resetStep,
   updateTortilla,
   updateMeat,
   updateRice,
   updateBeans,
   addAddOn,
   removeAddOn,
-  resetAll,
+  resetBurrito,
   addToCart,
   removeFromCart,
+  editBurrito,
+  resetAll,
 } = burritoIngredients.actions;
 
 export default burritoIngredients.reducer;

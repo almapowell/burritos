@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import ReviewBurrito from "../ReviewBurrito";
 import AddOnCheckbox from "../AddOnCheckbox";
@@ -17,13 +16,19 @@ import {
   addOnList,
   tortillaList,
 } from "../utils";
-import { addToCart, resetAll } from "../../redux/reducer";
+import {
+  addToCart,
+  resetBurrito,
+  resetStep,
+  stepBackward,
+  stepForward,
+} from "../../redux/reducer";
 import "./styles.css";
 
-export default function LineStepper() {
-  const [activeStep, setActiveStep] = useState(0);
-  const [skipped, setSkipped] = useState(new Set());
+const LineStepper = () => {
   const dispatch = useDispatch();
+
+  const activeStep = useSelector((state) => state.burritoState.activeStep);
   const selectedTortilla = useSelector(
     (state) => state.burritoState.selectedTortilla
   );
@@ -84,41 +89,17 @@ export default function LineStepper() {
     return step === 4;
   };
 
-  const isStepSkipped = (step) => {
-    return skipped.has(step);
-  };
-
   const handleNext = () => {
-    let newSkipped = skipped;
-    if (isStepSkipped(activeStep)) {
-      newSkipped = new Set(newSkipped.values());
-      newSkipped.delete(activeStep);
-    }
-
-    setActiveStep((prevActiveStep) => prevActiveStep + 1);
-    setSkipped(newSkipped);
+    dispatch(stepForward());
   };
 
   const handleBack = () => {
-    setActiveStep((prevActiveStep) => prevActiveStep - 1);
-  };
-
-  const handleSkip = () => {
-    if (!isStepOptional(activeStep)) {
-      throw new Error("You can't skip a step that isn't optional.");
-    }
-
-    setActiveStep((prevActiveStep) => prevActiveStep + 1);
-    setSkipped((prevSkipped) => {
-      const newSkipped = new Set(prevSkipped.values());
-      newSkipped.add(activeStep);
-      return newSkipped;
-    });
+    dispatch(stepBackward());
   };
 
   const handleReset = () => {
-    dispatch(resetAll());
-    setActiveStep(0);
+    dispatch(resetBurrito());
+    dispatch(resetStep());
   };
 
   const handleAddToCart = () => {
@@ -148,9 +129,6 @@ export default function LineStepper() {
               <Typography variant="caption">Optional</Typography>
             );
           }
-          if (isStepSkipped(index)) {
-            stepProps.completed = false;
-          }
           return (
             <Step key={label} {...stepProps}>
               <StepLabel {...labelProps}>{label}</StepLabel>
@@ -161,7 +139,7 @@ export default function LineStepper() {
       {activeStep === steps.length ? (
         <>
           <Typography sx={{ mt: 2, mb: 1 }}>
-            Your burrito is complete. Thank you.
+            Your burrito is complete. View in cart.
           </Typography>
           <Box sx={{ display: "flex", flexDirection: "row", pt: 2 }}>
             <Box sx={{ flex: "1 1 auto" }} />
@@ -190,12 +168,6 @@ export default function LineStepper() {
               Back
             </Button>
             <Box sx={{ flex: "1 1 auto" }} />
-            {isStepOptional(activeStep) && (
-              <Button color="inherit" onClick={handleSkip} sx={{ mr: 1 }}>
-                Skip
-              </Button>
-            )}
-
             <Button
               variant="contained"
               onClick={
@@ -209,4 +181,5 @@ export default function LineStepper() {
       )}
     </Box>
   );
-}
+};
+export default LineStepper;
