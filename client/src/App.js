@@ -1,30 +1,20 @@
-import { useEffect, useState } from 'react';
+import FoodRadioGroup from "./components/FoodRadioGroup";
+import LineStepper from "./components/LineStepper";
+import Cart from "./components/Cart";
+import { useSelector } from "react-redux";
 
 function App() {
+  const cart = useSelector((state) => state.burritoState.cart);
+  console.log(cart);
+
   return (
     <div className="App">
-      <header className="App-header">
-        <Hello />
-      </header>
+      <span className="title">Build Your Own Burrito</span>
+      <LineStepper />
+      <FoodRadioGroup />
+      {cart?.length > 0 && <Cart cart={cart} />}
     </div>
   );
-}
-
-function Hello() {
-  const [message, setMessage] = useState(null);
-  useEffect(() => {
-    fetch('/heading')
-      .then((x) => {
-        console.log({ x });
-        return x.json();
-      })
-      .then((x) => {
-        console.log({ x });
-        return setMessage(x.burritos);
-      });
-  }, [setMessage]);
-
-  return <div>Burritos. {message}</div>;
 }
 
 export default App;

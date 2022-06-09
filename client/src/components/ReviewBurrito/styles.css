@@ -1,0 +1,29 @@
+.imageReview {
+  margin: 0 -25px;
+  height: 200px;
+}
+
+.image {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.ingredients {
+  font-size: 25px;
+  margin: 20px;
+}
+
+.imageWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.section {
+  margin-top: 50px;
+}
+
+.total {
+  display: flex;
+  justify-content: flex-end;
+}

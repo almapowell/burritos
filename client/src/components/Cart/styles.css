@@ -1,0 +1,48 @@
+.cartContainer {
+  width: 80%;
+  margin-top: 50px;
+}
+
+.itemsWrapper {
+  display: flex;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+}
+
+.cartItem {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.itemPrice {
+  margin-top: 10px;
+  display: flex;
+  align-items: center;
+}
+
+.removeIcon:hover {
+  cursor: pointer;
+}
+
+.removeIcon svg {
+  transform: scale(0.7);
+  fill: red;
+  margin-left: 5px;
+}
+
+.checkout {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 20px;
+  font-size: 30px;
+  margin-top: 30px;
+}
+
+.confirmationButtons {
+  display: flex;
+  gap: 10px;
+}
