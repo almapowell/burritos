@@ -4,6 +4,7 @@
   padding: 20px 400px;
   align-items: center;
   height: 250px;
+  /* border: 1px solid green; */
 }
 
 .addOnWrapper {
@@ -12,4 +13,5 @@
   padding: 20px 200px;
   align-items: center;
   height: 250px;
+  /* border: 1px solid red; */
 }

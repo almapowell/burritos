@@ -5,7 +5,6 @@ import { useSelector } from "react-redux";
 
 function App() {
   const cart = useSelector((state) => state.burritoState.cart);
-  console.log(cart);
 
   return (
     <div className="App">

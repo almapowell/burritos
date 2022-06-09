@@ -2,6 +2,9 @@ import { useSelector } from "react-redux";
 import "./styles.css";
 
 const ReviewBurrito = () => {
+  const editingBurrito = useSelector(
+    (state) => state.burritoState.editingBurrito
+  );
   const selectedTortilla = useSelector(
     (state) => state.burritoState.selectedTortilla
   );
@@ -80,7 +83,9 @@ const ReviewBurrito = () => {
         )}
       </div>
 
-      <h2 className="total">Total: ${selectedAddOns.length + 6}.00</h2>
+      <h2 className="total">
+        {!editingBurrito && `Total: $${selectedAddOns.length + 6}.00`}
+      </h2>
     </div>
   );
 };
