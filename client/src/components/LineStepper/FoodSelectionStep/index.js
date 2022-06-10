@@ -40,7 +40,7 @@ const FoodSelectionStep = () => {
   const determineImg = (stepIteration) => {
     const standardImgSize = (type, ingredient) => (
       <img
-        style={{ height: ingredient === "add-ons" ? "10vw" : "15vw" }}
+        style={{ width: ingredient === "add-ons" ? "10vw" : "20vw" }}
         alt=""
         src={type}
       />
@@ -57,7 +57,7 @@ const FoodSelectionStep = () => {
         return standardImgSize(selectedBeans?.img);
       case 4:
         return (
-          <div>
+          <div className="addOnContainer">
             {selectedAddOns.map((item, index) => (
               <span key={index}>{standardImgSize(item?.img, "add-ons")}</span>
             ))}
