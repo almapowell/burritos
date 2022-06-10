@@ -1,5 +1,4 @@
 import Box from "@mui/material/Box";
-import { useTheme } from "@mui/material/styles";
 import MobileStepper from "@mui/material/MobileStepper";
 import Paper from "@mui/material/Paper";
 import Typography from "@mui/material/Typography";
@@ -8,16 +7,20 @@ import KeyboardArrowLeft from "@mui/icons-material/KeyboardArrowLeft";
 import KeyboardArrowRight from "@mui/icons-material/KeyboardArrowRight";
 import { steps } from "../../utils";
 import { useSelector, useDispatch } from "react-redux";
-import { stepBackward, stepForward, addToCart } from "../../../redux/reducer";
+import {
+  stepBackward,
+  stepForward,
+  addToCart,
+  updateBurrito,
+} from "../../../redux/reducer";
 import FoodSelectionStep from "../FoodSelectionStep";
 import StepperConclusion from "../StepperConclusion";
 
 const MobileLineStepper = () => {
   const dispatch = useDispatch();
 
-  const theme = useTheme();
-
   const {
+    editingBurritoId,
     editingBurrito,
     activeStep,
     selectedTortilla,
@@ -53,7 +56,21 @@ const MobileLineStepper = () => {
     handleNext();
   };
 
-  console.log(theme);
+  const handleUpdateBurrito = () => {
+    const editedBurrito = {
+      id: editingBurritoId,
+      ingredients: {
+        selectedTortilla,
+        selectedMeat,
+        selectedRice,
+        selectedBeans,
+        selectedAddOns,
+      },
+      price: selectedAddOns.length + 6,
+    };
+    dispatch(updateBurrito(editedBurrito));
+    handleNext();
+  };
 
   return (
     <Box sx={{ width: "90%", flexGrow: 1 }}>
@@ -84,7 +101,11 @@ const MobileLineStepper = () => {
             activeStep={activeStep}
             nextButton={
               activeStep === steps.length - 1 ? (
-                <Button onClick={editingBurrito ? handleNext : handleAddToCart}>
+                <Button
+                  onClick={
+                    editingBurrito ? handleUpdateBurrito : handleAddToCart
+                  }
+                >
                   {editingBurrito ? "Done" : "Add To Cart"}
                   <KeyboardArrowRight />
                 </Button>

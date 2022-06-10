@@ -1,6 +1,11 @@
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
-import { addToCart, stepBackward, stepForward } from "../../../redux/reducer";
+import {
+  addToCart,
+  stepBackward,
+  stepForward,
+  updateBurrito,
+} from "../../../redux/reducer";
 import { useDispatch, useSelector } from "react-redux";
 import { steps } from "../../utils";
 
@@ -8,6 +13,7 @@ const StepperActions = () => {
   const dispatch = useDispatch();
 
   const {
+    editingBurritoId,
     editingBurrito,
     activeStep,
     selectedTortilla,
@@ -41,8 +47,30 @@ const StepperActions = () => {
     handleNext();
   };
 
+  const handleUpdateBurrito = () => {
+    const editedBurrito = {
+      id: editingBurritoId,
+      ingredients: {
+        selectedTortilla,
+        selectedMeat,
+        selectedRice,
+        selectedBeans,
+        selectedAddOns,
+      },
+      price: selectedAddOns.length + 6,
+    };
+    dispatch(updateBurrito(editedBurrito));
+    handleNext();
+  };
+
   return (
-    <Box sx={{ display: "flex", flexDirection: "row", pt: 2 }}>
+    <Box
+      sx={{
+        display: "flex",
+        flexDirection: "row",
+        pt: 2,
+      }}
+    >
       <Button
         color="inherit"
         disabled={activeStep === 0}
@@ -56,7 +84,7 @@ const StepperActions = () => {
       {activeStep === steps.length - 1 ? (
         <Button
           variant="contained"
-          onClick={editingBurrito ? handleNext : handleAddToCart}
+          onClick={editingBurrito ? handleUpdateBurrito : handleAddToCart}
         >
           {editingBurrito ? "Done" : "Add To Cart"}
         </Button>

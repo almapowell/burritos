@@ -11,7 +11,7 @@ const LineStepper = () => {
   const activeStep = useSelector((state) => state.burritoState.activeStep);
 
   return (
-    <Box sx={{ width: "80%" }}>
+    <Box>
       <StepProcess />
       {activeStep === steps.length ? (
         <StepperConclusion />

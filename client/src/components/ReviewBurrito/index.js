@@ -3,7 +3,6 @@ import "./styles.css";
 
 const ReviewBurrito = () => {
   const {
-    editingBurrito,
     selectedTortilla,
     selectedMeat,
     selectedRice,
@@ -57,9 +56,7 @@ const ReviewBurrito = () => {
         )}
       </div>
 
-      <h2 className="total">
-        {!editingBurrito && `Total: $${selectedAddOns.length + 6}.00`}
-      </h2>
+      <h2 className="total">Total: ${selectedAddOns.length + 6}.00</h2>
     </div>
   );
 };

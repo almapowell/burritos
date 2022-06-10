@@ -10,10 +10,12 @@ function App() {
 
   return (
     <div className="App">
-      <Cart cart={cart} />
-      <span className="title">Build Your Own Burrito</span>
-      {onMobileDevice ? <MobileLineStepper /> : <LineStepper />}
-      <FoodRadioGroup />
+      <div style={{ width: "80%" }}>
+        <Cart cart={cart} />
+        <span className="title">Build Your Own Burrito</span>
+        {onMobileDevice ? <MobileLineStepper /> : <LineStepper />}
+        <FoodRadioGroup />
+      </div>
     </div>
   );
 }

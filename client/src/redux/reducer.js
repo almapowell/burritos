@@ -11,27 +11,12 @@ export const burritoIngredients = createSlice({
   initialState: {
     activeStep: 0,
     cart: [],
+    editingBurritoId: "",
     editingBurrito: false,
-    selectedTortilla: {
-      label: "Wheat",
-      value: "wheat",
-      img: "https://cdn.caferio.com/200050.jpg",
-    },
-    selectedMeat: {
-      label: "Beef",
-      value: "beef",
-      img: "https://cdn.caferio.com/50220.jpg",
-    },
-    selectedRice: {
-      label: "White Rice",
-      value: "white",
-      img: "https://cdn.caferio.com/200072.jpg",
-    },
-    selectedBeans: {
-      label: "Black Beans",
-      value: "black",
-      img: "https://cdn.caferio.com/251001.jpg",
-    },
+    selectedTortilla: tortillaList[0],
+    selectedMeat: meatList[0],
+    selectedRice: riceList[0],
+    selectedBeans: beansList[0],
     selectedAddOns: [],
   },
   reducers: {
@@ -79,6 +64,7 @@ export const burritoIngredients = createSlice({
     },
     editBurrito: (state, action) => {
       state.editingBurrito = true;
+      state.editingBurritoId = action.payload.id;
       state.selectedTortilla = action.payload.ingredients.selectedTortilla;
       state.selectedMeat = action.payload.ingredients.selectedMeat;
       state.selectedRice = action.payload.ingredients.selectedRice;
@@ -88,6 +74,11 @@ export const burritoIngredients = createSlice({
     emptyCart: (state) => {
       state.cart = [];
       state.activeStep = 0;
+    },
+    updateBurrito: (state, action) => {
+      state.cart = state.cart.filter((item) => item.id !== action.payload.id);
+      state.cart.push(action.payload);
+      state.editingBurrito = false;
     },
   },
 });
@@ -107,6 +98,7 @@ export const {
   removeFromCart,
   editBurrito,
   emptyCart,
+  updateBurrito,
 } = burritoIngredients.actions;
 
 export default burritoIngredients.reducer;

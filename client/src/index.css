@@ -20,6 +20,8 @@ code {
 }
 
 .title {
-  font-size: 40px;
-  margin: 40px 0;
+  font-size: 2rem;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 4rem;
 }

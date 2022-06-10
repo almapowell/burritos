@@ -41,7 +41,11 @@ const Cart = ({ cart }) => {
         ))}
         <div className="checkout">
           <span>Total: ${getTotalPrice()}.00</span>
-          <Button onClick={() => setCheckoutModal(true)} variant="contained">
+          <Button
+            disabled={cart.length === 0}
+            onClick={() => setCheckoutModal(true)}
+            variant="contained"
+          >
             Checkout
           </Button>
         </div>

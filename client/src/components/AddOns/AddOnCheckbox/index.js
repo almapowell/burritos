@@ -2,8 +2,8 @@ import { useDispatch, useSelector } from "react-redux";
 import Checkbox from "@mui/material/Checkbox";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import FormControl from "@mui/material/FormControl";
-import { addOnList } from "../utils";
-import { addAddOn, removeAddOn } from "../../redux/reducer";
+import { addOnList } from "../../utils";
+import { addAddOn, removeAddOn } from "../../../redux/reducer";
 
 const AddOnCheckbox = ({ foodList }) => {
   const dispatch = useDispatch();

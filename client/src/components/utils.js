@@ -1,7 +1,7 @@
-import guacamole from "./AddOnPhotos/guacamole.png";
-import cheese from "./AddOnPhotos/cheese.png";
-import sourCream from "./AddOnPhotos/sour-cream.png";
-import tomatos from "./AddOnPhotos/tomatos.png";
+import guacamole from "./AddOns/AddOnPhotos/guacamole.png";
+import cheese from "./AddOns/AddOnPhotos/cheese.png";
+import sourCream from "./AddOns/AddOnPhotos/sour-cream.png";
+import tomatos from "./AddOns/AddOnPhotos/tomatos.png";
 
 export const defaultFoodItem = {
   label: "",

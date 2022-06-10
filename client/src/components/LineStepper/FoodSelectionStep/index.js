@@ -1,6 +1,6 @@
 import FoodRadioGroup from "../../FoodRadioGroup";
 import ReviewBurrito from "../../ReviewBurrito";
-import AddOnCheckbox from "../../AddOnCheckbox";
+import AddOnCheckbox from "../../AddOns/AddOnCheckbox";
 import { useSelector } from "react-redux";
 import {
   meatList,
