@@ -12,16 +12,15 @@ import {
   updateTortilla,
 } from "../../redux/reducer";
 
-const FoodRadioGroup = ({ foodList, step }) => {
+const FoodRadioGroup = ({ foodList }) => {
   const dispatch = useDispatch();
-  const selectedTortilla = useSelector(
-    (state) => state.burritoState.selectedTortilla
-  );
-  const selectedMeat = useSelector((state) => state.burritoState.selectedMeat);
-  const selectedRice = useSelector((state) => state.burritoState.selectedRice);
-  const selectedBeans = useSelector(
-    (state) => state.burritoState.selectedBeans
-  );
+  const {
+    activeStep,
+    selectedTortilla,
+    selectedMeat,
+    selectedRice,
+    selectedBeans,
+  } = useSelector((state) => state.burritoState);
 
   const handleChange = (e) => {
     const item = e.target.value;
@@ -29,7 +28,7 @@ const FoodRadioGroup = ({ foodList, step }) => {
       ? foodList.filter((i) => i.value === item)[0]
       : defaultFoodItem;
 
-    switch (step) {
+    switch (activeStep) {
       case 0:
         return dispatch(updateTortilla(selectedItem));
       case 1:
@@ -44,7 +43,7 @@ const FoodRadioGroup = ({ foodList, step }) => {
   };
 
   const getSelectedFoodItem = () => {
-    switch (step) {
+    switch (activeStep) {
       case 0:
         return selectedTortilla;
       case 1:

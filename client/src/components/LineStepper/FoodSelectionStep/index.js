@@ -23,13 +23,13 @@ const FoodSelectionStep = () => {
   const determineFoodGroup = (stepIteration) => {
     switch (stepIteration) {
       case 0:
-        return <FoodRadioGroup step={0} foodList={tortillaList} />;
+        return <FoodRadioGroup foodList={tortillaList} />;
       case 1:
-        return <FoodRadioGroup step={1} foodList={meatList} />;
+        return <FoodRadioGroup foodList={meatList} />;
       case 2:
-        return <FoodRadioGroup step={2} foodList={riceList} />;
+        return <FoodRadioGroup foodList={riceList} />;
       case 3:
-        return <FoodRadioGroup step={3} foodList={beansList} />;
+        return <FoodRadioGroup foodList={beansList} />;
       case 4:
         return <AddOnCheckbox foodList={addOnList} />;
       default:
@@ -38,25 +38,28 @@ const FoodSelectionStep = () => {
   };
 
   const determineImg = (stepIteration) => {
+    const standardImgSize = (type, ingredient) => (
+      <img
+        style={{ height: ingredient === "add-ons" ? "10vw" : "15vw" }}
+        alt=""
+        src={type}
+      />
+    );
+
     switch (stepIteration) {
       case 0:
-        return <img alt="selected tortilla type" src={selectedTortilla?.img} />;
+        return standardImgSize(selectedTortilla?.img);
       case 1:
-        return <img alt="selected meat type" src={selectedMeat?.img} />;
+        return standardImgSize(selectedMeat?.img);
       case 2:
-        return <img alt="selected rice type" src={selectedRice?.img} />;
+        return standardImgSize(selectedRice?.img);
       case 3:
-        return <img alt="selected beans type" src={selectedBeans?.img} />;
+        return standardImgSize(selectedBeans?.img);
       case 4:
         return (
           <div>
             {selectedAddOns.map((item, index) => (
-              <img
-                key={index}
-                style={{ height: 200 }}
-                alt="selected add on"
-                src={item?.img}
-              />
+              <span key={index}>{standardImgSize(item?.img, "add-ons")}</span>
             ))}
           </div>
         );
@@ -69,9 +72,9 @@ const FoodSelectionStep = () => {
       {activeStep === 5 ? (
         <ReviewBurrito />
       ) : (
-        <div className={activeStep === 4 ? "addOnWrapper" : "contentWrapper"}>
-          {determineFoodGroup(activeStep)}
-          {determineImg(activeStep)}
+        <div className="contentWrapper">
+          <div>{determineFoodGroup(activeStep)}</div>
+          <div>{determineImg(activeStep)}</div>
         </div>
       )}
     </div>

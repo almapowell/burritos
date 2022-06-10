@@ -9,6 +9,8 @@ export const defaultFoodItem = {
   img: "",
 };
 
+export const onMobileDevice = window.innerWidth < 1000;
+
 export const steps = [
   "Select Tortilla",
   "Select Meat",

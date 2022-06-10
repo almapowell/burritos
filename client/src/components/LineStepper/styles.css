@@ -1,17 +1,6 @@
 .contentWrapper {
   display: flex;
-  justify-content: space-between;
-  padding: 20px 400px;
+  justify-content: space-evenly;
   align-items: center;
-  height: 250px;
-  /* border: 1px solid green; */
-}
-
-.addOnWrapper {
-  display: flex;
-  justify-content: space-between;
-  padding: 20px 200px;
-  align-items: center;
-  height: 250px;
-  /* border: 1px solid red; */
+  height: max-content;
 }

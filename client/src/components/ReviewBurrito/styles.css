@@ -1,19 +1,22 @@
-.imageReview {
-  margin: 0 -25px;
-  height: 200px;
-}
-
-.image {
+.ingredientWrapper {
   display: flex;
   justify-content: space-evenly;
 }
 
-.ingredients {
-  font-size: 25px;
+@media screen and (min-width: 1000) {
+  .ingredientWrapper {
+    display: flex;
+    justify-content: space-evenly;
+    flex-direction: column;
+  }
+}
+
+.titles {
+  font-size: 1.5rem;
   margin: 20px;
 }
 
-.imageWrapper {
+.itemWrapper {
   display: flex;
   flex-direction: column;
   align-items: center;

@@ -24,8 +24,7 @@ const AddOnCheckbox = ({ foodList }) => {
       {foodList?.map((item, index) => (
         <FormControlLabel
           key={index}
-          value={selectedAddOns.includes(item)}
-          control={<Checkbox />}
+          control={<Checkbox checked={selectedAddOns.includes(item)} />}
           label={item.label}
           onChange={(e) => handleSelectedCheckbox(index, e.target.checked)}
         />
