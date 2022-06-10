@@ -73,7 +73,7 @@ const MobileLineStepper = () => {
   };
 
   return (
-    <Box sx={{ width: "90%", flexGrow: 1 }}>
+    <Box sx={{ flexGrow: 1 }}>
       {activeStep === steps.length ? (
         <StepperConclusion />
       ) : (
